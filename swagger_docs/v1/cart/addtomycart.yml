@@ -1,0 +1,56 @@
+This is the addToMyCart API. 
+The purpose of this API is to add a product to the customers cart.
+
+---
+
+post:
+  tags:
+    - Add Product to Cart API
+    
+  parameters:
+    # An example parameter that is in query and is required
+    -
+      name: customerId
+      in: body
+      description: Id of logged in customer
+      required: false
+      type: number
+    -
+      name: productId
+      in: body
+      description: Id of the product to remove
+      required: true
+      type: number
+
+    -
+      name: qty
+      in: body
+      description: Quantity of product
+      required: true
+      type: number
+      
+  # Expected responses for this operation:
+  responses:
+    # Response code
+    200:
+      description: Successful response. Item successfully added
+      # A schema describing your response object.
+      # Use JSON Schema format
+      schema:
+        properties:
+          s:
+            type: number
+            description: success status
+          m:
+            type: string
+            description: Message returned from server
+          d:
+            type: object
+            description: response object from server
+            properties:
+              products:
+                type: object
+                description: Updated products in cart
+              ordersumary:
+                type: object
+                description: summary of the cart
