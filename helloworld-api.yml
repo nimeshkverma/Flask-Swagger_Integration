@@ -4,41 +4,103 @@ info:
   title: "Add to cart"
   version: "1.0"
 
-basePath: /v1.0
+basePath: /1/personal/cart
 
 paths:
-  /AddToMyCart:
+  /addToMyCart:
     post:
       summary: Add to cart
       description: Adds the product to User's cart.
       operationId: app.v1.cart.views.AddToMyCart.dispatch_request
       responses:
         200:
-          #description: greeting response
-          #schema:
-           # type: string
+          description: Success status
           schema:
-            properties:
-              s:
-                type: number
-                description: success status
-              m:
-                type: string
-                description: Message returned from server
-              d:
-                type: object
-                description: response object from server
-                properties:
-                  products:
-                    type: object
-                    description: Updated products in cart
-                  ordersumary:
-                    type: object
-                    description: summary of the cart
-                    
+            type: array
+            items:
+              properties:
+                s:
+                  type: number
+                  description: success status
+                m:
+                  type: string
+                  description: Message returned from server
+                  default: Message returned from server
+                d:
+                  type: object
+                  description: response object from server
+                  items:
+                    properties:
+                      products:
+                        type: object
+                        description: Updated products in cart
+                      ordersumary:
+                        type: object
+                        description: summary of the cart
+                  
       parameters:
-        - name: name
-          in: path
-          description: Name of the person to greet.
+        - name: customerId
+          in: body
+          description: Id of the customer.
+          required: false
+          type: string
+        - name: productId
+          in: body
+          description: Id of the product to add.
+          required: true
+          type: string
+        - name: qty
+          in: body
+          description: Quantity of product to add.
+          required: true
+          type: string
+
+
+  /MyCartDetails:
+    post:
+      summary: Details of cart
+      description: Display cart details of current User
+      operationId: app.v1.cart.views.MyCartDetails.dispatch_request
+      responses:
+        200:
+          description: Success status
+          schema:
+            type: array
+            items:
+              properties:
+                s:
+                  type: number
+                  description: success status
+                m:
+                  type: string
+                  description: Message returned from server
+                  default: Message returned from server
+                d:
+                  type: object
+                  description: response object from server
+                  # schema:
+                  items:
+                    properties:
+                      products:
+                        type: object
+                        description: Updated products in cart
+                      ordersumary:
+                        type: object
+                        description: summary of the cart
+                  
+      parameters:
+        - name: customerId
+          in: body
+          description: Id of the customer.
+          required: false
+          type: string
+        - name: productId
+          in: body
+          description: Id of the product to add.
+          required: true
+          type: string
+        - name: qty
+          in: body
+          description: Quantity of product to add.
           required: true
           type: string
