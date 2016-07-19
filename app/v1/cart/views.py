@@ -100,10 +100,12 @@ class AddToMyCart(View):
         @process_params(param_config=self.param_config['with_auth'], header_config=header_config['with_auth'])
         @authorization
         def add_user_cart(params, header_params, auth):
+            print "inside auth"
             return render_success_response(self.response_data, 200)
 
         @process_params(param_config=self.param_config['without_auth'], header_config=header_config['without_auth'])
         def add_guest_cart(params, header_params):
+            print "inside guest"
             return render_success_response(self.response_data, 200)
 
         def perform():
@@ -111,6 +113,7 @@ class AddToMyCart(View):
                 response = add_user_cart()
             else:
                 response = add_guest_cart()
+            print response
             return response
 
         return perform()

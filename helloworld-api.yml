@@ -1,0 +1,44 @@
+swagger: "2.0"
+
+info:
+  title: "Add to cart"
+  version: "1.0"
+
+basePath: /v1.0
+
+paths:
+  /AddToMyCart:
+    post:
+      summary: Add to cart
+      description: Adds the product to User's cart.
+      operationId: app.v1.cart.views.AddToMyCart.dispatch_request
+      responses:
+        200:
+          #description: greeting response
+          #schema:
+           # type: string
+          schema:
+            properties:
+              s:
+                type: number
+                description: success status
+              m:
+                type: string
+                description: Message returned from server
+              d:
+                type: object
+                description: response object from server
+                properties:
+                  products:
+                    type: object
+                    description: Updated products in cart
+                  ordersumary:
+                    type: object
+                    description: summary of the cart
+                    
+      parameters:
+        - name: name
+          in: path
+          description: Name of the person to greet.
+          required: true
+          type: string
